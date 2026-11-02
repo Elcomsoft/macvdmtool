@@ -12,12 +12,16 @@ ifeq ($(PREFIX),)
     PREFIX := /usr/local
 endif
 
+ifneq ($(DESTDIR),)
+    PREFIX := /usr/local
+endif
+
 INSTALL := /usr/bin/install
 
 .PHONY: install
 install: macvdmtool
-	$(INSTALL) -d "$(PREFIX)/bin/"
-	$(INSTALL) -m 755 -o 0 -g 0 "$(<)" "$(PREFIX)/bin/"
+	$(INSTALL) -d "$(DESTDIR)$(PREFIX)/bin/"
+	$(INSTALL) -m 755 -o 0 -g 0 "$(<)" "$(DESTDIR)$(PREFIX)/bin/"
 
 clean:
 	rm -f macvdmtool
