@@ -6,7 +6,7 @@ OBJS := main.o
 all: macvdmtool
 
 macvdmtool: $(OBJS)
-	cc -o $@ $(OBJS) $(LDFLAGS)
+	$(CC) -o $@ $(OBJS) $(LDFLAGS)
 
 ifeq ($(PREFIX),)
     PREFIX := /usr/local
@@ -16,5 +16,9 @@ INSTALL := /usr/bin/install
 
 .PHONY: install
 install: macvdmtool
-	@sudo $(INSTALL) -d "$(PREFIX)/bin/"
-	@sudo $(INSTALL) -m 755 -o root -g wheel "$(<)" "$(PREFIX)/bin/"
+	$(INSTALL) -d "$(PREFIX)/bin/"
+	$(INSTALL) -m 755 -o 0 -g 0 "$(<)" "$(PREFIX)/bin/"
+
+clean:
+	rm -f macvdmtool
+	rm -f main.o
